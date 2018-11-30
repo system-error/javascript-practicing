@@ -13,17 +13,20 @@ var scores , roundScore, currentPlayer, gameStatus = true, tempDice1, tempDice2,
 
 initialGame();
 
+function hideTheDice(){
+    document.querySelector('#dice-1').style.display = 'none';
+    document.querySelector('#dice-2').style.display = 'none';
+}
+
 document.querySelector('.btn-roll').addEventListener('click', function() {
     if (gameStatus){
         var dice1  = Math.floor(Math.random() * 6) + 1;
         var dice2  = Math.floor(Math.random() * 6) + 1;
         // 2. Display the dice image and the result
-        var dice1DOM = document.getElementById('dice-1');
-        var dice2DOM = document.getElementById('dice-2');
-        dice1DOM.style.display = 'block';
-        dice1DOM.src = 'dice-' + dice1 + '.png';
-        dice2DOM.style.display = 'block';
-        dice2DOM.src = 'dice-' + dice2 + '.png';
+        document.getElementById('dice-1').style.display = 'block';
+        document.getElementById('dice-2').style.display = 'block';
+        document.getElementById('dice-1').src = 'dice-' + dice1 + '.png';
+        document.getElementById('dice-2').src = 'dice-' + dice2 + '.png';
         
         if (dice1 === 6 && tempDice1 === 6 || dice2 === 6 && tempDice2 === 6){
             //Player looses all its score
@@ -54,24 +57,16 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 
         // 2. Update the global score
         document.querySelector('#score-' + currentPlayer).textContent = scores[currentPlayer];
-
+        takeTheScore();
+        console.log(getTheNewScore);
         // Check if one of players won the game
-        if (scores[currentPlayer] >= 20){
+        if (scores[currentPlayer] >= getTheNewScore){
             document.querySelector('#name-' + currentPlayer).textContent = 'Winner!'
-            document.querySelector('#dice-1').style.display = 'none';
-            document.querySelector('#dice-2').style.display = 'none';
+            hideTheDice();
             document.querySelector('.player-' + currentPlayer + '-panel').classList.add('winner');
             document.querySelector('.player-' + currentPlayer + '-panel').classList.remove('active');
             gameStatus = false;
-        }else if(scores[currentPlayer] >= getTheNewScore && getTheNewScore !== ''){
-            document.querySelector('#name-' + currentPlayer).textContent = 'Winner!'
-            document.querySelector('#dice-1').style.display = 'none';
-            document.querySelector('#dice-2').style.display = 'none';
-            document.querySelector('.player-' + currentPlayer + '-panel').classList.add('winner');
-            document.querySelector('.player-' + currentPlayer + '-panel').classList.remove('active');
-            gameStatus = false;
-        }
-        else{
+        }else{
             //Next player
             nextPlayer();
         }  
@@ -95,8 +90,7 @@ function nextPlayer(){
     // }
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
-    document.querySelector('#dice-1').style.display = 'none';
-    document.querySelector('#dice-2').style.display = 'none';
+    hideTheDice();
 
     /* In this code below this will not work the change for second player to first because we must write again the opposite code to do that, from player-1 to player-0 . Thus we uses the tolgle method */
 
@@ -112,8 +106,7 @@ function initialGame(){
     currentPlayer = 0;
     gameStatus = true;
     document.querySelector('.final-score').value = '';
-    document.querySelector('#dice-1').style.display = 'none';
-    document.querySelector('#dice-2').style.display = 'none';
+    hideTheDice();
     document.getElementById('score-0').textContent = '0';
     document.getElementById('current-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
@@ -143,11 +136,16 @@ function initialGame(){
 
 }
 
-document.querySelector('.final-score').addEventListener('blur', function() {
-    getTheNewScore = document.querySelector('.final-score').value
-    console.log(getTheNewScore);
-});
+function takeTheScore(){
+    var scoreFromInput = document.querySelector('.final-score').value;
+    if (scoreFromInput ){
+        getTheNewScore = scoreFromInput;
+    }else{
+        getTheNewScore = 20;
+    }
+}
 
+// document.querySelector('.final-score').addEventListener('blur', takeTheScore);
 // document.querySelector('#current-' + currentPlayer).innerHTML = '<em>' + dice + '</em>';
 
 // var x = document.querySelector('#score-0').textContent;
