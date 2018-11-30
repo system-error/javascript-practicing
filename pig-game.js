@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var scores , roundScore, currentPlayer, gameStatus = true, tempDice1, tempDice2, getTheNewScore;
+var scores , roundScore, currentPlayer, gameStatus = true, tempDice1, tempDice2, getTheNewScore, NameOfPlayerOne, NameOfPlayerTwo;
 
 initialGame();
 
@@ -125,6 +125,20 @@ function initialGame(){
     document.querySelector('.player-1-panel').classList.remove('active');
     document.querySelector('.player-0-panel').classList.remove('winner');
     document.querySelector('.player-1-panel').classList.remove('winner');
+    // NameOfPlayerOne = prompt('Player One Give Us Your Name: ');
+    // NameOfPlayerTwo = prompt('Player Two Give Us Your Name: ');
+
+    // if (NameOfPlayerOne === null || NameOfPlayerOne === ''){
+    //     document.getElementById('name-0').textContent = 'Player 1';
+    // }else if (NameOfPlayerTwo === null || NameOfPlayerTwo === ''){
+    //     document.getElementById('name-1').textContent = 'Player 2';
+    // }else{
+    //     document.getElementById('name-0').textContent = NameOfPlayerOne;
+    //     document.getElementById('name-1').textContent = NameOfPlayerTwo;
+    // }
+    // // alert(NameOfPlayerOne,NameOfPlayerTwo);
+    // console.log(NameOfPlayerOne);
+    // console.log(NameOfPlayerTwo);
     
 
 }
