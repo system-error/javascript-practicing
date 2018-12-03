@@ -23,5 +23,7 @@ var allTheAnswers = [question1, question2, question3];
 
 var randomQuestions = Math.floor(Math.random() * allTheAnswers.length);
 
+var getTheAnswer = prompt('Please answer the question.If you want to close the game type exit');
 
-console.log(allTheAnswers[randomQuestions]);
+
+console.log(getTheAnswer);
